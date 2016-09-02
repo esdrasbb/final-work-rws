@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1,
+maximum-scale=1, user-scalable=no">
+<title>Curso RWS</title>
+<link href="css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+	<div class="container">
+		<div class="page-header">
+			<h3>Cadastro de Veículos</h3>
+		</div>
+		<form class="form" novalidate>
+			<input type="hidden" id="id" />
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12">
+					<div id="global-message" class="alert text-center" role="alert"
+						hidden></div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-4">
+					<div class="form-group">
+						<label for="placa" class="control-label">Placa</label> <input
+							type="text" class="form-control" id="placa"
+							placeholder="AAA9999" maxlength="7" title="Placa" />
+						<span id="placa-message" class="text-danger" hidden></span>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-12 col-md-4">
+					<div class="form-group">
+						<label for="nome" class="control-label">Nome proprietário</label> <input
+							type="text" class="form-control" id="nome"
+							placeholder="Nome proprietário" maxlength="100"
+							title="Nome deve ter no mínimo 3 caracteres" /> <span
+							id="nome-message" class="text-danger" hidden></span>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-4">
+					<div class="form-group">
+						<label for="data" class="control-label"> Data de
+							emplacamento</label> <input type="text" class="form-control" id="data"
+							placeholder="99/99/9999" maxlength="20" /> <span
+							id="data-message" class="text-danger" hidden></span>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-4">
+					<div class="form-group">
+						<label for="valor" class="control-label"> Valor ipva</label> <input
+							type="text" class="form-control" id="valor"
+							placeholder="999.99" maxlength="255" /> <span
+							id="valor-message" class="text-danger" hidden></span>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div
+					class="col-xs-12 col-sm-4 col-md-2
+col-sm-offset-4 col-md-offset-5">
+					<button id="salvar" class="btn btn-success btn-block" type="button">
+						<span class="glyphicon glyphicon-ok"></span> Salvar
+					</button>
+					<button id="excluir" class="btn btn-danger btn-block" type="button">
+						<span class="glyphicon glyphicon-remove"></span> Excluir
+					</button>
+					<a class="btn btn-primary btn-block" href="veiculos-listar.html">
+						<span class="glyphicon glyphicon-menu-left"></span> Voltar
+					</a>
+				</div>
+			</div>
+		</form>
+	</div>
+	<script src="js/lib/jquery.js"></script>
+	<script src="js/lib/bootstrap.js"></script>
+	<script src="js/api/veiculos-proxy.js"></script>
+	<script src="js/ctrl/veiculos-editar.js"></script>
+</body>
+</html>

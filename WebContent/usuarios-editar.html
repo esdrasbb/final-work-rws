@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1,
+maximum-scale=1, user-scalable=no">
+<title>Curso RWS</title>
+<link href="css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+	<div class="container">
+		<div class="page-header">
+			<h3>Cadastro de Usuários</h3>
+		</div>
+		<form class="form" novalidate>
+			<input type="hidden" id="id" />
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12">
+					<div id="global-message" class="alert text-center" role="alert"
+						hidden></div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-4">
+					<div class="form-group">
+						<label for="cpf" class="control-label">CPF</label> <input
+							type="text" class="form-control" id="cpf"
+							placeholder="99999999999" maxlength="11" title="CPF do usuário." />
+						<span id="cpf-message" class="text-danger" hidden></span>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-12 col-md-4">
+					<div class="form-group">
+						<label for="nome" class="control-label">Nome</label> <input
+							type="text" class="form-control" id="nome"
+							placeholder="Nome completo" maxlength="100"
+							title="Nome deve ter no mínimo 3 caracteres" /> <span
+							id="nome-message" class="text-danger" hidden></span>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-4">
+					<div class="form-group">
+						<label for="data" class="control-label"> Data de
+							nascimento</label> <input type="text" class="form-control" id="data"
+							placeholder="99/99/9999" maxlength="20" /> <span
+							id="data-message" class="text-danger" hidden></span>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-4">
+					<div class="form-group">
+						<label for="email" class="control-label"> Email</label> <input
+							type="email" class="form-control" id="email"
+							placeholder="nome@provedor.com" maxlength="255" /> <span
+							id="email-message" class="text-danger" hidden></span>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-4">
+					<div class="form-group">
+						<label for="senha" class="control-label"> Senha</label> <input
+							type="text" class="form-control" id="senha" maxlength="10"
+							required /> <span id="senha-message" class="text-danger" hidden></span>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div
+					class="col-xs-12 col-sm-4 col-md-2
+col-sm-offset-4 col-md-offset-5">
+					<button id="salvar" class="btn btn-success btn-block" type="button">
+						<span class="glyphicon glyphicon-ok"></span> Salvar
+					</button>
+					<button id="excluir" class="btn btn-danger btn-block" type="button">
+						<span class="glyphicon glyphicon-remove"></span> Excluir
+					</button>
+					<a class="btn btn-primary btn-block" href="usuarios-listar.html">
+						<span class="glyphicon glyphicon-menu-left"></span> Voltar
+					</a>
+				</div>
+			</div>
+		</form>
+	</div>
+	<script src="js/lib/jquery.js"></script>
+	<script src="js/lib/bootstrap.js"></script>
+	<script src="js/api/usuarios-proxy.js"></script>
+	<script src="js/ctrl/usuarios-editar.js"></script>
+</body>
+</html>
