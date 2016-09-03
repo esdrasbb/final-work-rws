@@ -16,28 +16,28 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import br.com.cursorws.business.UsuarioBC;
+import br.com.cursorws.business.EstadoBC;
 import br.com.cursorws.business.exception.BeanNotFoundException;
 import br.com.cursorws.business.exception.ValidacaoException;
-import br.com.cursorws.model.Usuario;
+import br.com.cursorws.model.Estado;
 
-@Path("usuarios")
-public class UsuariosRS {
+@Path("estados")
+public class EstadoRS {
 	@Inject
-	private UsuarioBC usuarioBC;
+	private EstadoBC estadoBC;
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Usuario> selecionar() {
-		return usuarioBC.selecionar();
+	public List<Estado> selecionar() {
+		return estadoBC.selecionar();
 	}
 
 	@GET
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Usuario selecionar(@PathParam("id") Long id) {
+	public Estado selecionar(@PathParam("id") Long id) {
 		try {
-			return usuarioBC.selecionar(id);
+			return estadoBC.selecionar(id);
 		} catch (BeanNotFoundException e) {
 			throw new NotFoundException(e.getMessage());
 		}
@@ -46,10 +46,10 @@ public class UsuariosRS {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response inserir(Usuario body) {
+	public Response inserir(Estado body) {
 		try {
-			Long id = usuarioBC.inserir(body);
-			String url = "/api/usuarios/" + id;
+			Long id = estadoBC.inserir(body);
+			String url = "/api/estados/" + id;
 			return Response.status(Status.CREATED).header("Location", url).entity(id).build();
 		} catch (ValidacaoException e) {
 			return tratarValidacaoException(e);
@@ -60,10 +60,10 @@ public class UsuariosRS {
 	@Path("{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response atualizar(@PathParam("id") Long id, Usuario usuario) {
+	public Response atualizar(@PathParam("id") Long id, Estado estado) {
 		try {
-			usuario.setId(id);
-			usuarioBC.atualizar(usuario);
+			estado.setId(id);
+			estadoBC.atualizar(estado);
 			return Response.status(Status.OK).entity(id).build();
 		} catch (BeanNotFoundException e) {
 			throw new NotFoundException();
@@ -77,8 +77,8 @@ public class UsuariosRS {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response excluir(@PathParam("id") Long id) {
 		try {
-			Usuario usuario = usuarioBC.excluir(id);
-			return Response.status(Status.OK).entity(usuario).build();
+			Estado estado = estadoBC.excluir(id);
+			return Response.status(Status.OK).entity(estado).build();
 		} catch (BeanNotFoundException e) {
 			throw new NotFoundException();
 		}

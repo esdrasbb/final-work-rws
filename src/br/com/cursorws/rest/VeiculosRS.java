@@ -18,7 +18,7 @@ import javax.ws.rs.core.Response.Status;
 
 import br.com.cursorws.business.VeiculoBC;
 import br.com.cursorws.business.exception.ValidacaoException;
-import br.com.cursorws.business.exception.VeiculoNaoEncontradoException;
+import br.com.cursorws.business.exception.BeanNotFoundException;
 import br.com.cursorws.model.Veiculo;
 
 @Path("veiculos")
@@ -38,7 +38,7 @@ public class VeiculosRS {
 	public Veiculo selecionar(@PathParam("id") Long id) {
 		try {
 			return veiculoBC.selecionar(id);
-		} catch (VeiculoNaoEncontradoException e) {
+		} catch (BeanNotFoundException e) {
 			throw new NotFoundException(e.getMessage());
 		}
 	}
@@ -65,7 +65,7 @@ public class VeiculosRS {
 			veiculo.setId(id);
 			veiculoBC.atualizar(veiculo);
 			return Response.status(Status.OK).entity(id).build();
-		} catch (VeiculoNaoEncontradoException e) {
+		} catch (BeanNotFoundException e) {
 			throw new NotFoundException();
 		} catch (ValidacaoException e) {
 			return tratarValidacaoException(e);
@@ -79,7 +79,7 @@ public class VeiculosRS {
 		try {
 			Veiculo veiculo = veiculoBC.excluir(id);
 			return Response.status(Status.OK).entity(veiculo).build();
-		} catch (VeiculoNaoEncontradoException e) {
+		} catch (BeanNotFoundException e) {
 			throw new NotFoundException();
 		}
 	}

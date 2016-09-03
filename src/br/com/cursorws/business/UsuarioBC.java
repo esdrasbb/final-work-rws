@@ -11,7 +11,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 
-import br.com.cursorws.business.exception.UsuarioNaoEncontradoException;
+import br.com.cursorws.business.exception.BeanNotFoundException;
 import br.com.cursorws.business.exception.ValidacaoException;
 import br.com.cursorws.dao.Repositorio;
 import br.com.cursorws.model.Usuario;
@@ -58,10 +58,10 @@ public class UsuarioBC {
 		return repositorio.selecionar(Usuario.class);
 	}
 
-	public Usuario selecionar(Long id) throws UsuarioNaoEncontradoException {
+	public Usuario selecionar(Long id) throws BeanNotFoundException {
 		Usuario usuario = repositorio.selecionar(Usuario.class, id);
 		if (usuario == null) {
-			throw new UsuarioNaoEncontradoException();
+			throw new BeanNotFoundException();
 		}
 		return usuario;
 	}
@@ -71,17 +71,17 @@ public class UsuarioBC {
 		return repositorio.inserir(usuario);
 	}
 
-	public void atualizar(Usuario usuario) throws UsuarioNaoEncontradoException, ValidacaoException {
+	public void atualizar(Usuario usuario) throws BeanNotFoundException, ValidacaoException {
 		validar(usuario);
 		if (!repositorio.atualizar(usuario)) {
-			throw new UsuarioNaoEncontradoException();
+			throw new BeanNotFoundException();
 		}
 	}
 
-	public Usuario excluir(Long id) throws UsuarioNaoEncontradoException {
+	public Usuario excluir(Long id) throws BeanNotFoundException {
 		Usuario usuario = repositorio.excluir(Usuario.class, id);
 		if (usuario == null) {
-			throw new UsuarioNaoEncontradoException();
+			throw new BeanNotFoundException();
 		}
 		return usuario;
 	}

@@ -11,8 +11,8 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 
+import br.com.cursorws.business.exception.BeanNotFoundException;
 import br.com.cursorws.business.exception.ValidacaoException;
-import br.com.cursorws.business.exception.VeiculoNaoEncontradoException;
 import br.com.cursorws.dao.Repositorio;
 import br.com.cursorws.model.Veiculo;
 
@@ -53,10 +53,10 @@ public class VeiculoBC {
 		return repositorio.selecionar(Veiculo.class);
 	}
 
-	public Veiculo selecionar(Long id) throws VeiculoNaoEncontradoException {
+	public Veiculo selecionar(Long id) throws BeanNotFoundException {
 		Veiculo veiculo = repositorio.selecionar(Veiculo.class, id);
 		if (veiculo == null) {
-			throw new VeiculoNaoEncontradoException();
+			throw new BeanNotFoundException();
 		}
 		return veiculo;
 	}
@@ -66,17 +66,17 @@ public class VeiculoBC {
 		return repositorio.inserir(veiculo);
 	}
 
-	public void atualizar(Veiculo veiculo) throws VeiculoNaoEncontradoException, ValidacaoException {
+	public void atualizar(Veiculo veiculo) throws BeanNotFoundException, ValidacaoException {
 		validar(veiculo);
 		if (!repositorio.atualizar(veiculo)) {
-			throw new VeiculoNaoEncontradoException();
+			throw new BeanNotFoundException();
 		}
 	}
 
-	public Veiculo excluir(Long id) throws VeiculoNaoEncontradoException {
+	public Veiculo excluir(Long id) throws BeanNotFoundException {
 		Veiculo veiculo = repositorio.excluir(Veiculo.class, id);
 		if (veiculo == null) {
-			throw new VeiculoNaoEncontradoException();
+			throw new BeanNotFoundException();
 		}
 		return veiculo;
 	}
