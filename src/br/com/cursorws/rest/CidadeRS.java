@@ -1,7 +1,5 @@
 package br.com.cursorws.rest;
 
-import java.util.List;
-
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -16,10 +14,10 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import br.com.cursorws.business.EstadoBC;
+import br.com.cursorws.business.CidadeBC;
 import br.com.cursorws.business.exception.BeanNotFoundException;
 import br.com.cursorws.business.exception.ValidacaoException;
-import br.com.cursorws.model.Estado;
+import br.com.cursorws.model.Cidade;
 
 @Path("cidades")
 public class CidadeRS {
@@ -27,15 +25,9 @@ public class CidadeRS {
 	private CidadeBC cidadeBC;
 
 	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<Cidade> selecionar() {
-		return cidadeBC.selecionar();
-	}
-
-	@GET
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Estado selecionar(@PathParam("id") Long id) {
+	public Cidade selecionar(@PathParam("id") Long id) {
 		try {
 			return cidadeBC.selecionar(id);
 		} catch (BeanNotFoundException e) {
@@ -46,10 +38,10 @@ public class CidadeRS {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response inserir(Estado body) {
+	public Response inserir(Cidade body) {
 		try {
 			Long id = cidadeBC.inserir(body);
-			String url = "/api/estados/" + id;
+			String url = "/api/cidades/" + id;
 			return Response.status(Status.CREATED).header("Location", url).entity(id).build();
 		} catch (ValidacaoException e) {
 			return tratarValidacaoException(e);
@@ -60,10 +52,10 @@ public class CidadeRS {
 	@Path("{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response atualizar(@PathParam("id") Long id, Estado estado) {
+	public Response atualizar(@PathParam("id") Long id, Cidade cidade) {
 		try {
-			estado.setId(id);
-			cidadeBC.atualizar(estado);
+			cidade.setId(id);
+			cidadeBC.atualizar(cidade);
 			return Response.status(Status.OK).entity(id).build();
 		} catch (BeanNotFoundException e) {
 			throw new NotFoundException();
@@ -77,8 +69,8 @@ public class CidadeRS {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response excluir(@PathParam("id") Long id) {
 		try {
-			Estado estado = cidadeBC.excluir(id);
-			return Response.status(Status.OK).entity(estado).build();
+			Cidade cidade = cidadeBC.excluir(id);
+			return Response.status(Status.OK).entity(cidade).build();
 		} catch (BeanNotFoundException e) {
 			throw new NotFoundException();
 		}
