@@ -14,8 +14,7 @@ maximum-scale=1, user-scalable=no">
 			<h3>Cadastro de Cidades</h3>
 		</div>
 		<form class="form" novalidate>
-			<input type="hidden" id="id" />
-			<input type="hidden" id="estadoId" />
+			<input type="hidden" id="id" /> <input type="hidden" id="estadoId" />
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-12">
 					<div id="global-message" class="alert text-center" role="alert"
@@ -28,7 +27,7 @@ maximum-scale=1, user-scalable=no">
 					<div class="form-group">
 						<label for="nome" class="control-label">Nome</label> <input
 							type="text" class="form-control" id="nome"
-							placeholder="Nome completo" maxlength="100"
+							placeholder="Nome completo" maxlength="100" required
 							title="Nome deve ter no mínimo 3 caracteres" /> <span
 							id="nome-message" class="text-danger" hidden></span>
 					</div>
@@ -37,7 +36,7 @@ maximum-scale=1, user-scalable=no">
 					<div class="form-group">
 						<label for="data" class="control-label"> Data da
 							constituição</label> <input type="text" class="form-control" id="data"
-							placeholder="99/99/9999" maxlength="20" /> <span
+							placeholder="99/99/9999" maxlength="20" required /> <span
 							id="data-message" class="text-danger" hidden></span>
 					</div>
 				</div>
@@ -45,15 +44,16 @@ maximum-scale=1, user-scalable=no">
 					<div class="form-group">
 						<label for="populacao" class="control-label"> Populacao</label> <input
 							type="text" class="form-control" id="populacao" placeholder="999"
-							maxlength="15" /> <span id="populacao-message"
+							required maxlength="15" /> <span id="populacao-message"
 							class="text-danger" hidden></span>
 					</div>
 				</div>
 				<div class="col-xs-12 col-sm-6 col-md-4">
 					<div class="form-group">
 						<label for="pib" class="control-label"> PIB</label> <input
-							type="text" class="form-control" id="pib" maxlength="15" required />
-						<span id="pib-message" class="text-danger" hidden></span>
+							type="text" class="form-control" id="pib" maxlength="15"
+							placeholder="999" required /> <span id="pib-message"
+							class="text-danger" hidden></span>
 					</div>
 				</div>
 			</div>
@@ -67,8 +67,8 @@ col-sm-offset-4 col-md-offset-5">
 					<button id="excluir" class="btn btn-danger btn-block" type="button">
 						<span class="glyphicon glyphicon-remove"></span> Excluir
 					</button>
-					<a class="btn btn-primary btn-block" id="back-estado-btn">
-						<span class="glyphicon glyphicon-menu-left"></span> Voltar
+					<a class="btn btn-primary btn-block" id="back-estado-btn"> <span
+						class="glyphicon glyphicon-menu-left"></span> Voltar
 					</a>
 				</div>
 			</div>

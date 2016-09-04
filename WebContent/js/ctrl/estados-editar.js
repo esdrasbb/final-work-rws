@@ -1,14 +1,10 @@
 ﻿$(function() {
 	var id = obterParametroDaUrlPorNome('id');
 	if (id) {
-		EstadosProxy.selecionar(id).done(obterOk).fail(tratarErro);
 		$("#cidades-div").show();
 		$("#cidades-alert").hide();
 		$("#nova-cidade-btn").attr("href", "cidades-editar.html?estadoId=" + id);
-		
-		//validar aqui se a lista de cidades está preenchida
-		//popular a tabela
-		
+		EstadosProxy.selecionar(id).done(obterOk).fail(tratarErro);
 	}
 	$("#excluir").click(function(event) {
 		var id = $("#id").val();
@@ -19,11 +15,13 @@
 				limparMensagensErro();
 				var estado = {
 					id : $("#id").val(),
-					nome : $("#placa").val(),
-					sigla : $("#nome").val()
+					nome : $("#nome").val(),
+					sigla : $("#sigla").val()
 				};
 
-				if (estados.id) {
+				console.log(estado);
+				
+				if (estado.id) {
 					EstadosProxy.atualizar(estado.id, estado).done(
 							atualizarOk).fail(tratarErro);
 				} else {
@@ -87,6 +85,8 @@ function obterOk(data) {
 	$("#id").val(data.id);
 	$("#nome").val(data.nome);
 	$("#sigla").val(data.sigla);
+	
+	populaCidades(data.cidades);
 }
 
 function atualizarOk(data, textStatus, jqXHR) {
@@ -111,4 +111,59 @@ function limparMensagensErro() {
 	$(".control-label").parent().removeClass("has-success");
 	$(".text-danger").parent().removeClass("has-error");
 	$(".text-danger").hide();
+}
+
+function populaCidades(cidades){
+	console.log(cidades);
+	var body = document.getElementsByTagName("tbody")[0];
+	$(body).empty();
+	if (cidades) {
+		for (var i = 0; i < cidades.length; i++) {
+			var cidade = cidades[i];
+			var row = document.createElement('tr');
+			
+			var cellId = document.createElement('td');
+			var textId = document.createTextNode(cidade.id);
+			var linkId = document.createElement('a');
+			linkId.setAttribute("href", "cidades-editar.html?id="
+					+ cidade.id + "&estadoId=" + cidade.estadoId);
+			linkId.appendChild(textId);
+			cellId.appendChild(linkId);
+			
+			var cellNome = document.createElement('td');
+			var textNome = document.createTextNode(cidade.nome);
+			cellNome.appendChild(textNome);
+						
+			var cellContituicao = document.createElement('td');
+			var textContituicao = document.createTextNode(cidade.data);
+			cellContituicao.appendChild(textContituicao);
+			
+			var cellPopulacao = document.createElement('td');
+			var textPopulacao = document.createTextNode(cidade.populacao);
+			cellPopulacao.appendChild(textPopulacao);
+
+			var cellPIB = document.createElement('td');
+			var textPIB = document.createTextNode(cidade.pib);
+			cellPIB.appendChild(textPIB);
+			
+			row.appendChild(cellId);
+			row.appendChild(cellNome);
+			row.appendChild(cellContituicao);
+			row.appendChild(cellPopulacao);
+			row.appendChild(cellPIB);
+			body.appendChild(row);
+		}
+	} else {
+		var table = document.getElementsByTagName("table")[0];
+		var foot = document.createElement('tfoot');
+		var emptyRow = document.createElement('tr');
+		var emptyCell = document.createElement('td');
+		var noRegisterText = document
+				.createTextNode("Nenhum registro encontrado!");
+		emptyCell.appendChild(noRegisterText);
+		emptyCell.setAttribute("colspan", 5);
+		emptyRow.appendChild(emptyCell);
+		foot.appendChild(emptyRow);
+		table.appendChild(foot);
+	}		
 }

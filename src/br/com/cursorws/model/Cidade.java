@@ -1,7 +1,6 @@
 package br.com.cursorws.model;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.util.Date;
 
 import javax.validation.constraints.NotNull;
@@ -27,10 +26,10 @@ public class Cidade extends BaseModel implements Serializable {
 	private Date data;
 
 	@NotNull
-	private BigInteger populacao;
+	private Long populacao;
 
 	@NotNull
-	private BigInteger pib;
+	private Double pib;
 
 	@NotNull
 	private Long estadoId;
@@ -42,6 +41,10 @@ public class Cidade extends BaseModel implements Serializable {
 	public Cidade(Long id) {
 		this();
 		setId(id);
+	}
+	
+	public Cidade(String empty){
+		super();
 	}
 
 	public String getNome() {
@@ -60,19 +63,19 @@ public class Cidade extends BaseModel implements Serializable {
 		this.data = data;
 	}
 
-	public BigInteger getPopulacao() {
+	public Long getPopulacao() {
 		return populacao;
 	}
 
-	public void setPopulacao(BigInteger populacao) {
+	public void setPopulacao(Long populacao) {
 		this.populacao = populacao;
 	}
 
-	public BigInteger getPib() {
+	public Double getPib() {
 		return pib;
 	}
 
-	public void setPib(BigInteger pib) {
+	public void setPib(Double pib) {
 		this.pib = pib;
 	}
 

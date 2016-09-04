@@ -1,6 +1,6 @@
 package br.com.cursorws.business;
 
-import java.math.BigInteger;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -13,11 +13,14 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 
+import org.apache.commons.beanutils.BeanUtils;
+
 import br.com.cursorws.business.exception.BeanNotFoundException;
 import br.com.cursorws.business.exception.ValidacaoException;
 import br.com.cursorws.dao.Repositorio;
 import br.com.cursorws.model.Cidade;
 import br.com.cursorws.model.Estado;
+import br.com.cursorws.model.EstadoForm;
 
 @ApplicationScoped
 public class EstadoBC {
@@ -39,16 +42,20 @@ public class EstadoBC {
 		Calendar data = Calendar.getInstance();
 
 		Cidade cidade = new Cidade();
+		cidade.setId(1L);
 		cidade.setNome("Cidade 1");
-		cidade.setPib(new BigInteger("100,00"));
-		cidade.setPopulacao(new BigInteger("1000"));
+		cidade.setPib(100.00D);
+		cidade.setPopulacao(1000L);
 		cidade.setData(data.getTime());
+		cidade.setEstadoId(1L);
 
 		Cidade cidade2 = new Cidade();
+		cidade2.setId(2L);
 		cidade2.setNome("Cidade 2");
-		cidade2.setPib(new BigInteger("200,00"));
-		cidade2.setPopulacao(new BigInteger("2000"));
+		cidade2.setPib(200.00D);
+		cidade2.setPopulacao(2000L);
 		cidade2.setData(data.getTime());
+		cidade2.setEstadoId(1L);
 
 		cidades.add(cidade);
 		cidades.add(cidade2);
@@ -68,7 +75,12 @@ public class EstadoBC {
 		return veiculo;
 	}
 
-	public Long inserir(Estado estado) throws ValidacaoException {
+	public Long inserir(EstadoForm estadoForm) throws ValidacaoException{
+		Estado estado = new Estado();
+		try {
+			BeanUtils.copyProperties(estado, estadoForm);
+		} catch (IllegalAccessException | InvocationTargetException e) {
+		}
 		validar(estado);
 		return repositorio.inserir(estado);
 	}

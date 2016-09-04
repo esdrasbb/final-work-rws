@@ -25,11 +25,11 @@ public class CidadeRS {
 	private CidadeBC cidadeBC;
 
 	@GET
-	@Path("{id}")
+	@Path("{id}/{estadoId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Cidade selecionar(@PathParam("id") Long id) {
+	public Cidade selecionar(@PathParam("id") Long id, @PathParam("estadoId") Long estadoId) {
 		try {
-			return cidadeBC.selecionar(id);
+			return cidadeBC.selecionar(id, estadoId);
 		} catch (BeanNotFoundException e) {
 			throw new NotFoundException(e.getMessage());
 		}
@@ -65,11 +65,11 @@ public class CidadeRS {
 	}
 
 	@DELETE
-	@Path("{id}")
+	@Path("{id}/{estadoId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response excluir(@PathParam("id") Long id) {
+	public Response excluir(@PathParam("id") Long id, @PathParam("estadoId") Long estadoId) {
 		try {
-			Cidade cidade = cidadeBC.excluir(id);
+			Cidade cidade = cidadeBC.excluir(id, estadoId);
 			return Response.status(Status.OK).entity(cidade).build();
 		} catch (BeanNotFoundException e) {
 			throw new NotFoundException();

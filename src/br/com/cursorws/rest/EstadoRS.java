@@ -20,6 +20,7 @@ import br.com.cursorws.business.EstadoBC;
 import br.com.cursorws.business.exception.BeanNotFoundException;
 import br.com.cursorws.business.exception.ValidacaoException;
 import br.com.cursorws.model.Estado;
+import br.com.cursorws.model.EstadoForm;
 
 @Path("estados")
 public class EstadoRS {
@@ -46,7 +47,7 @@ public class EstadoRS {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response inserir(Estado body) {
+	public Response inserir(EstadoForm body) {
 		try {
 			Long id = estadoBC.inserir(body);
 			String url = "/api/estados/" + id;

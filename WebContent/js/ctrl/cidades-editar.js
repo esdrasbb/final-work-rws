@@ -1,14 +1,16 @@
 ﻿$(function() {
 	var estadoId = obterParametroDaUrlPorNome('estadoId');
-	$("#back-estado-btn").attr("href", "estados-listar.html?id=" + estadoId);
+	$("#back-estado-btn").attr("href", "estados-editar.html?id=" + estadoId);
+	console.log(estadoId);
+	$("#estadoId").val(estadoId);
 	
 	var id = obterParametroDaUrlPorNome('id');
 	if (id) {
-		CidadesProxy.selecionar(id).done(obterOk).fail(tratarErro);
+		CidadesProxy.selecionar(id, estadoId).done(obterOk).fail(tratarErro);
 	}
 	$("#excluir").click(function(event) {
 		var id = $("#id").val();
-		CidadesProxy.excluir(id).done(excluirOk).fail(tratarErro);
+		CidadesProxy.excluir(id, estadoId).done(excluirOk).fail(tratarErro);
 	});
 	$("#salvar").click(
 			function(event) {
@@ -26,7 +28,7 @@
 					CidadesProxy.atualizar(cidade.id, cidade).done(
 							atualizarOk).fail(tratarErro);
 				} else {
-					CidadesProxy.inserir(usuario).done(inserirOk).fail(
+					CidadesProxy.inserir(cidade).done(inserirOk).fail(
 							tratarErro);
 				}
 			});

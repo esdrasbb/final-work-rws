@@ -1,9 +1,9 @@
 var CidadesProxy = {
 	url : "api/cidades",
-	selecionar : function(id) {
+	selecionar : function(id, estadoId) {
 		return $.ajax({
 			type : "GET",
-			url : this.url + "/" + id
+			url : this.url + "/" + id + "/" + estadoId
 		});
 	},
 	inserir : function(cidade) {
@@ -22,10 +22,10 @@ var CidadesProxy = {
 			contentType : "application/json"
 		});
 	},
-	excluir : function(id) {
+	excluir : function(id, estadoId) {
 		return $.ajax({
 			type : "DELETE",
-			url : this.url + "/" + id
+			url : this.url + "/" + id + "/" + estadoId
 		});
 	}
 };

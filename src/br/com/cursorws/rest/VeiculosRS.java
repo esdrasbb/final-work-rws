@@ -17,8 +17,8 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import br.com.cursorws.business.VeiculoBC;
-import br.com.cursorws.business.exception.ValidacaoException;
 import br.com.cursorws.business.exception.BeanNotFoundException;
+import br.com.cursorws.business.exception.ValidacaoException;
 import br.com.cursorws.model.Veiculo;
 
 @Path("veiculos")
